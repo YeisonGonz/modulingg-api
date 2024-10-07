@@ -1,0 +1,6 @@
+{
+    "module_whitelist": false,
+    "enabled_modules_whitelist": [],
+    "module_launcher_name": "main",
+    "modules_folder_name": "modules"
+}
