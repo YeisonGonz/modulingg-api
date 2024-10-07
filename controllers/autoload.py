@@ -4,7 +4,7 @@ from typing import List
 
 from pydantic import BaseModel
 
-from controllers.config import CONFIGURATION, Config
+from controllers.config import CONFIGURATION, Config, Manifest
 from controllers.logger import log_message
 from schemas.basic_response import Module
 
@@ -37,7 +37,8 @@ def search_modules():
                 
                 if os.path.exists(main_file):
                     module_name = f'{MODULES_FOLDER}.{foldername}.{INIT_FILE}'
-                    founded_modules.append(module_name)
+                    manifest = makeManifest(f'{MODULES_FOLDER}/{foldername}')
+                    founded_modules.append([module_name,manifest])
         except Exception as e:
             log_message('ERROR', f"Error searching module {foldername} ❌ ({str(e)})")
     
@@ -49,15 +50,18 @@ def include_module_list(moduleList: List[str], fastApiApp) -> List[str]:
     modules_loaded = []
     moduleVerifier = ModuleVerifier()
 
-    for module_name in moduleList:
+    for module in moduleList:
         try:
+            module_name = module[0] # Module name moduleFolder.folder.main
+            module_manifest = module[1] # All Manifest object
+            
             module = importlib.import_module(module_name)
             fastApiApp.include_router(module.router)        
             completeModule = makeModule(module.router.routes, module_name)
             moduleVerifier.append(completeModule)
             modules_loaded.append(module_name)
 
-            log_message('INFO', f'  -   Loaded {module_name} 📦 ({module_name})')
+            log_message('INFO', f'  -   Loaded {module_manifest.name} 📦 ({module_name}) by "{module_manifest.author}"')
         except Exception as e:
             log_message('ERROR', f"Error loading module {module_name} ❌ ({str(e)})")
     
@@ -70,8 +74,9 @@ def autoload_modules(fastApiApp):
     log_message('INFO', f'Searching for modules in {MODULES_FOLDER}...')
     module_whitelist_status = CONFIGURATION['module_whitelist']
     
+    # Load all modules, either from the whitelist or all available. 
     all_modules = search_modules()
-    
+
     if module_whitelist_status:
         enabled_modules = CONFIGURATION['enabled_modules_whitelist']
         enabled_modules_in_all = [module for module in all_modules if module in enabled_modules]
@@ -89,3 +94,9 @@ def makeModule(moduleRouteApi, moduleName) -> Module:
         endpoints.append(moduleRoute.path)
         
     return Module(name=moduleName, endpoints=endpoints)
+
+def makeManifest(path) -> Manifest:
+    try: 
+        return Manifest.read_config(f'{path}/manifest.json')
+    except FileNotFoundError:
+        return Manifest(name=path.replace("/","."), short_name=path.replace("/","."),description="a" ,author='Unknow', version='Unknow')

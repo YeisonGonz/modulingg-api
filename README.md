@@ -60,6 +60,20 @@ Esto es una base, cada desarrollador puede agregar sus funcionalidades.
 
 En el repositorio hay dos modulos de ejemplos.
 
+### Manifest
+
+Este tipo de archivo es útil para describir las características y propiedades básicas del módulo, permitiendo que otros desarrolladores o sistemas lo comprendan e interactúen con él. A continuación, detallo cada uno de los campos:
+
+```json
+{
+    "name": "My Module Name",
+    "short_name": "my-module-name",
+    "description": "A simple module for demonstrating Modulingg usage.",
+    "author": "Author Name",
+    "version": "1.0.0"
+}
+```
+
 ---
 
 Este proyecto ofrece una estructura flexible y modular que permite a los desarrolladores añadir fácilmente funcionalidades específicas al backend sin comprometer el orden ni la escalabilidad.
