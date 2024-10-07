@@ -40,6 +40,26 @@ El núcleo del proyecto es la implementación de módulos. Cada uno debe seguir 
 
 Todos los módulos desarrollados deben cumplir con el estándar **Modulingg**.
 
+### Como crear un modulo ?
+
+Crear un modulo es muy sencillo, **Modulingg** se encarga de crear una aplicacion FastAPI, y los modulos funcionan creando un router, con sus Endpoints, funcionalidad, ORM, lo que el desarrollador quiera. Y **Modulingg** carga el APIRouter de cada uno de los modulos en la aplicacion FastAPI principal.
+
+Cada uno de los modulos se almacena en una carperta con su fichero de arranque, el cual puedes configurar, y las funcionalidades. Aqui un ejemplo de un fichero de arranque basico.
+
+```python
+from fastapi import APIRouter
+router = APIRouter()
+
+@router.get('/api/v1')
+async def read_root():
+    return {"message": "Test Module v1"}
+```
+Fichero: example/main.py
+
+Esto es una base, cada desarrollador puede agregar sus funcionalidades.
+
+En el repositorio hay dos modulos de ejemplos.
+
 ---
 
 Este proyecto ofrece una estructura flexible y modular que permite a los desarrolladores añadir fácilmente funcionalidades específicas al backend sin comprometer el orden ni la escalabilidad.
