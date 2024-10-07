@@ -1,4 +1,4 @@
-# Modulatingg API | 📦
+# Modulingg API | 📦
 
 ## ¿En qué se basa este proyecto?
 
