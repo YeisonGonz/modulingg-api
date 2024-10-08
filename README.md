@@ -4,6 +4,38 @@
 
 Modulatingg API es una base sólida diseñada para facilitar la creación de un backend escalable y organizado utilizando Python y FastAPI 🐍. La idea es proporcionar un entorno plug-and-play en el que los desarrolladores puedan construir módulos independientes con la estructura adecuada. Una vez configurados, solo es necesario añadir estos módulos a la carpeta correspondiente para que funcionen de inmediato.
 
+## Como empezar a programar ? 🧑‍💻
+
+Para iniciar con el desarrollo, sigue estos pasos:
+
+1. **Descarga el proyecto en tu equipo**: Clona o descarga el repositorio en tu máquina local.
+
+2. **Configura un entorno virtual de Python**: Esto te permitirá aislar las dependencias del proyecto del resto del sistema, asegurando que las versiones de las librerías utilizadas no interfieran con otros proyectos. 
+
+Reemplaza path/to/venv con la ruta donde quieres almacenar tu entorno virtual.
+
+```bash
+# Crear el entrono virtual
+python -m venv path/to/venv
+
+# Activar el entorno virtual de Python
+source path/to/venv/bin/activate
+```
+
+
+Ahora tendras el entorno virtual de Python activado, podras ver un distintivo en la consola, con el nombre del entorno virtual.
+
+Y ahora solo quedara instalar **FastApi** y ejecutar el proyecto
+
+```bash
+# Instala FastAPI
+pip install "fastapi[standard]"
+
+# Ejecutar el proyecto FastApi en modo desarrollo
+fastapi dev 
+```
+
+
 ## Configuración ⚙️
 
 ### Lista Blanca 📋

@@ -2,8 +2,8 @@ from pydantic import BaseModel
 from typing import List, Union
 
 class HostResponse(BaseModel):
-    message: str = "Welcome to Modulatingg"
-    version: str = "0.0.1"    
+    message: str = "Welcome to Modulingg"
+    version: str = "1.0.1"    
 
 
 class ModulesListResponse(BaseModel):
