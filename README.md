@@ -74,13 +74,13 @@ Todos los módulos desarrollados deben cumplir con el estándar **Modulingg**.
 
 ### Como crear un modulo ?
 
-Crear un modulo es muy sencillo, **Modulingg** se encarga de crear una aplicacion FastAPI, y los modulos funcionan creando un router, con sus Endpoints, funcionalidad, ORM, lo que el desarrollador quiera. Y **Modulingg** carga el APIRouter de cada uno de los modulos en la aplicacion FastAPI principal.
+Crear un modulo es muy sencillo, **Modulingg** se encarga de crear una aplicacion FastAPI, y los modulos funcionan creando un router, con sus Endpoints, funcionalidad, ORM, lo que el desarrollador quiera. Y **Modulingg** carga el APIRouter de cada uno de los modulos en la aplicacion FastAPI principal, es necesario respetar el nombre de la variable **router**, ya que si el nombre difiere podria provocar problemas a la hora de cargar el módulo.
 
 Cada uno de los modulos se almacena en una carperta con su fichero de arranque, el cual puedes configurar, y las funcionalidades. Aqui un ejemplo de un fichero de arranque basico.
 
 ```python
 from fastapi import APIRouter
-router = APIRouter()
+router = APIRouter() # Importante mantener el nombre de 'router'
 
 @router.get('/api/v1')
 async def read_root():
