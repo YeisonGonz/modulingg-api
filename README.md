@@ -31,8 +31,29 @@ Y ahora solo quedara instalar **FastApi** y ejecutar el proyecto
 # Instala FastAPI
 pip install "fastapi[standard]"
 
+# Esto solo se aplica para la version 1.0
 # Ejecutar el proyecto FastApi en modo desarrollo
 fastapi dev 
+```
+
+Para las versiones 1.1 y en adelante se ha integrado una CLI interna, para hacer mas sencillo la ejecucion del entorno y poder agregar en un futuro nuevas funcionalidades mas amplias y complejas.
+
+Solo deberas ejecutar instalar la aplicación como un paquete y ya podras desarrollar, con el siguiente comando:
+
+```bash
+# Se instalara modulingg como un paquete
+pip install -e .
+
+# Para abrir abrir la aplicación
+modulingg 
+```
+
+Con la aplicación lanzada solo quedara poner el comando para ejecutar FastApi:
+
+
+```bash
+# Lanzara FastApi junto a los modulos de la carpeta './modules'
+run dev
 ```
 
 

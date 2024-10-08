@@ -4,9 +4,9 @@ from typing import List
 
 from pydantic import BaseModel
 
-from controllers.config import CONFIGURATION, Config, Manifest
-from controllers.logger import log_message
-from schemas.basic_response import Module
+from modulingg.controllers.config import CONFIGURATION, Config, Manifest
+from modulingg.controllers.logger import log_message
+from modulingg.schemas.basic_response import Module
 
 MODULES_FOLDER = CONFIGURATION['modules_folder_name']
 INIT_FILE = CONFIGURATION['module_launcher_name']
@@ -28,22 +28,26 @@ class ModuleVerifier(BaseModel):
 # Busca todos los modulos disponibles
 def search_modules():
     founded_modules = []
-    for foldername in os.listdir(MODULES_FOLDER):
-        folder_path = os.path.join(MODULES_FOLDER, foldername)
-        
+    # Usa os.path.abspath para asegurar que obtienes la ruta correcta
+    base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+    modules_path = os.path.join(base_path, MODULES_FOLDER)
+
+    for foldername in os.listdir(modules_path):
+        folder_path = os.path.join(modules_path, foldername)
+
         try:
             if os.path.isdir(folder_path):
                 main_file = os.path.join(folder_path, f'{INIT_FILE}.py')
-                
+
                 if os.path.exists(main_file):
+                    # Cambia la forma de construir el nombre del módulo
                     module_name = f'{MODULES_FOLDER}.{foldername}.{INIT_FILE}'
-                    manifest = makeManifest(f'{MODULES_FOLDER}/{foldername}')
-                    founded_modules.append([module_name,manifest])
+                    manifest = makeManifest(folder_path)
+                    founded_modules.append([module_name, manifest])
         except Exception as e:
             log_message('ERROR', f"Error searching module {foldername} ❌ ({str(e)})")
     
     return founded_modules
- 
 
 # Lee la lista de modulos a incluir en el Router
 def include_module_list(moduleList: List[str], fastApiApp) -> List[str]:
@@ -61,6 +65,7 @@ def include_module_list(moduleList: List[str], fastApiApp) -> List[str]:
             moduleVerifier.append(completeModule)
             modules_loaded.append(module_name)
 
+ 
             log_message('INFO', f'  -   Loaded {module_manifest.name} 📦 ({module_name}) by "{module_manifest.author}"')
         except Exception as e:
             log_message('ERROR', f"Error loading module {module_name} ❌ ({str(e)})")

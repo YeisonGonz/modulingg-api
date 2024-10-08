@@ -3,7 +3,7 @@ from typing import Optional
 
 from pydantic import BaseModel, Field
 
-CONFIG_FILE = './config/config.json'
+CONFIG_FILE = 'modulingg/config/config.json'
 
 
 class Config:
