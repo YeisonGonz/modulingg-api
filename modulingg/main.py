@@ -1,3 +1,7 @@
 from modulingg.core.CLI import CLI
 
-CLI().cmdloop()
+try:
+    CLI().cmdloop()
+except KeyboardInterrupt:
+    print("Goodbye...")
+    

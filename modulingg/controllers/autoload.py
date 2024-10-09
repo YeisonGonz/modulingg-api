@@ -92,6 +92,23 @@ def autoload_modules(fastApiApp):
     log_message('INFO', f'Modules loaded {len(loaded_modules)} successfully ')
     return loaded_modules
                 
+def mono_module_run(fastApiApp,moduleName):
+    log_message('INFO', f'Starting Modulingg 📦 | Mode: mono_module')       
+    all_modules = search_modules() 
+    
+    for module in all_modules:
+        try:
+            module_name = module[0]
+            
+            # Search all modules that match the provided moduleName
+            if module_name == f'{MODULES_FOLDER}.{moduleName}.main':
+                module = importlib.import_module(module_name)
+                fastApiApp.include_router(module.router)        
+                completeModule = makeModule(module.router.routes, module_name)
+                log_message('INFO', f'  -   Loaded {completeModule.name} 📦 ({module_name})')
+        except Exception as e:
+            log_message('ERROR', f"Error loading module {module_name} ❌ ({str(e)})")
+                
                 
 def makeModule(moduleRouteApi, moduleName) -> Module:
     endpoints = []
