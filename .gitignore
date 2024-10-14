@@ -2,3 +2,4 @@ venv/
 .vscode/
 __pycache__/
 modulingg.egg-info/
+venv-w/

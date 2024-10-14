@@ -1,7 +1,4 @@
-
 from modulingg.controllers.autoload import search_modules
-
-
 def only_modules():
     all_content = search_modules()
     modules = []
@@ -10,8 +7,6 @@ def only_modules():
         modules.append(split_content[1])
         
     return modules
-
-
 
 def only_manifest():
     all_content = search_modules()
@@ -29,3 +24,7 @@ def print_manifest(manifest):
     print(f"    Description: {manifest.description}")
     print(f"    Author: {manifest.author}")
     print(f"    Version: {manifest.version}")
+    
+    
+def print_endpoints_mono(endpoints: list):
+    return

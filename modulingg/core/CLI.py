@@ -2,6 +2,7 @@ import cmd
 import os
 import subprocess
 
+from modulingg.controllers.autoload import get_router_endpoints
 from modulingg.controllers.logger import log_message
 from modulingg.core.utils import only_manifest, only_modules, print_manifest
 
@@ -15,6 +16,7 @@ class CLI(cmd.Cmd):
     prompt = "📦 > "
 
     def do_run(self, arg):
+        os.environ["FASTAPI_STATUS"] = "multi_module"
         if arg == "dev":
             try:
                 subprocess.run(FASTAPI_COMMAND_DEV)
@@ -26,7 +28,12 @@ class CLI(cmd.Cmd):
                 subprocess.run(FASTAPI_COMMAND_PR)
             except KeyboardInterrupt:
                 log_message('INFO', '    Modulingg shutdown.')
-                
+                        
+    def do_clear(self,arg):
+        if os.name == 'nt':
+            os.system('cls')  # For Windows
+        else:
+            os.system('clear')  # For macOS/Linux
                 
     def do_info(self, arg):
         all_modules = only_modules()
@@ -51,19 +58,40 @@ class CLI(cmd.Cmd):
                 os.environ["FASTAPI_MODULE"] = arg
                 
                 subprocess.run(FASTAPI_COMMAND_DEV)
-                
-           
+            else:
+                print(f"The module '{arg}' does not exist in the list.")
         except ValueError:
             print(f"The module '{arg}' does not exist in the list.")
-        
+        except KeyboardInterrupt:
+            log_message('INFO', '    Modulingg shutdown.')
 
+    
+    # Launch FASTAPI server and return all the endpoints of the module selected
+    def do_endmodule(self,arg):
+        all_modules = only_modules()
+        try:
+            if arg in all_modules:               
+                fastapi_status = "inspector" 
+                os.environ["FASTAPI_STATUS"] = fastapi_status
+                os.environ["FASTAPI_MODULE"] = arg
+                
+                out = subprocess.run(FASTAPI_COMMAND_DEV)
+            else:
+                print(f"The module '{arg}' does not exist in the list.")
+        except ValueError:
+            print(f"The module '{arg}' does not exist in the list.")
+        except KeyboardInterrupt:
+            log_message('INFO', '    Modulingg shutdown.')
 
-    def do_exit(self, arg):
+    def do_EOF(self,arg):
+        print("Goodbye...")
+        return True
+
+    def do_exit(self,arg):
         print("Goodbye...")
         return True
 
 
-    # Manejo de error de comando no encontrado
     def default(self, line):
         print(f"Unknow command: {line}")
         

@@ -49,6 +49,7 @@ def search_modules():
     
     return founded_modules
 
+
 # Lee la lista de modulos a incluir en el Router
 def include_module_list(moduleList: List[str], fastApiApp) -> List[str]:
     modules_loaded = []
@@ -103,12 +104,30 @@ def mono_module_run(fastApiApp,moduleName):
             # Search all modules that match the provided moduleName
             if module_name == f'{MODULES_FOLDER}.{moduleName}.main':
                 module = importlib.import_module(module_name)
-                fastApiApp.include_router(module.router)        
+                fastApiApp.include_router(module.router)
                 completeModule = makeModule(module.router.routes, module_name)
                 log_message('INFO', f'  -   Loaded {completeModule.name} 📦 ({module_name})')
         except Exception as e:
             log_message('ERROR', f"Error loading module {module_name} ❌ ({str(e)})")
                 
+                
+                
+# Return a list of all endpoints in a module.
+def get_router_endpoints(fastApiApp,moduleName):
+    all_modules = search_modules() 
+    for module in all_modules:
+        try:
+            module_name = module[0]
+
+            if module_name == f'{MODULES_FOLDER}.{moduleName}.main':
+                module = importlib.import_module(module_name)
+                fastApiApp.include_router(module.router)
+                completeModule = makeModule(module.router.routes, module_name)
+                return completeModule.endpoints
+        except Exception as e:
+            log_message('ERROR', f"Error loading module {module_name} ❌ ({str(e)})")
+    
+    return 
                 
 def makeModule(moduleRouteApi, moduleName) -> Module:
     endpoints = []
