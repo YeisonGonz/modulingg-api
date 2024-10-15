@@ -3,6 +3,8 @@ from modulingg.controllers.autoload import search_modules
 
 router = APIRouter()
 
+# Simple internal router with the basic operations
+
 @router.get('/')
 async def main():
     return {"message": "Modulingg say Hello!"}

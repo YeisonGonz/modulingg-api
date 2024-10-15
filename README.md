@@ -87,6 +87,15 @@ Configura aquí las opciones relativas a los módulos.
     - **Tipo**: `string`
     - **Valor predeterminado**: `modules`
 
+### Router
+
+Configura aqui las opciones del router.
+
+- **Habilita/Deshabilita que se cargue el router interno.**:
+  - **`enable_internal_router`**:
+    - **Tipo**: `boolean`
+    - **Valor predeterminado**: `true`
+
 ## Módulos 📦
 
 El núcleo del proyecto es la implementación de módulos. Cada uno debe seguir un estándar básico y coherente para garantizar su correcto funcionamiento dentro del sistema.
