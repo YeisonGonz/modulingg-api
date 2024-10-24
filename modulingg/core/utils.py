@@ -1,15 +1,17 @@
-from modulingg.controllers.autoload import search_modules
-def only_modules():
-    all_content = search_modules()
+from modulingg.controllers.autoload import Autoloader
+def only_modules(): 
+    autoloader = Autoloader()
+    all_content = autoloader.search_modules()
     modules = []
     for content in all_content:
         split_content = content[0].split('.')
-        modules.append(split_content[1])
+        modules.append(split_content[0]) # I've spent 40 minutes looking for the bug to realize that this is the shit I'm missing.
         
     return modules
 
 def only_manifest():
-    all_content = search_modules()
+    autoloader = Autoloader()
+    all_content = autoloader.search_modules()
     manifest = []
     for content in all_content:
         manifest.append(content[1])
@@ -24,7 +26,3 @@ def print_manifest(manifest):
     print(f"    Description: {manifest.description}")
     print(f"    Author: {manifest.author}")
     print(f"    Version: {manifest.version}")
-    
-    
-def print_endpoints_mono(endpoints: list):
-    return

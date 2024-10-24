@@ -4,6 +4,7 @@ from typing import Optional
 from pydantic import BaseModel, Field
 
 CONFIG_FILE = 'modulingg/config/config.json'
+COMMANDS_DIRECTORY_FILE = 'modulingg/config/commands.json'
 
 
 class Config:
@@ -12,7 +13,15 @@ class Config:
             data = json.load(file)
         return data
 
+
+class CommandsDictionary:
+    def read_config(self):
+        with open(COMMANDS_DIRECTORY_FILE, 'r') as file:
+            data = json.load(file)
+        return data
+
 CONFIGURATION = Config().read_config()
+
 
 class Manifest(BaseModel):
     name: str

@@ -1,6 +1,7 @@
 from fastapi import APIRouter
-from modulingg.controllers.autoload import search_modules
+from modulingg.controllers.autoload import Autoloader
 
+autoloader = Autoloader()
 router = APIRouter()
 
 # Simple internal router with the basic operations
@@ -11,7 +12,7 @@ async def main():
 
 @router.get('/modules')
 async def modules():
-    return search_modules()
+    return autoloader.search_modules()
 
 @router.get('/health')
 async def health():

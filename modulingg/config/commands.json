@@ -1,0 +1,9 @@
+{
+    "help": "You can see all available commands.",
+    "run": "Execute FastAPI, it can be in development mode <dev> or production mode <pr>.",
+    "clear": "Clear the console",
+    "info": "Display information about a module",
+    "runmodule": "Run a FastAPI development environment specifying the module you want to test.",
+    "endmodule": "You can view all Endpoints of a specific module",
+    "exit": "Exit"
+}

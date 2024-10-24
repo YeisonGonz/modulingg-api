@@ -3,5 +3,6 @@
     "enabled_modules_whitelist": [],
     "module_launcher_name": "main",
     "modules_folder_name": "modules",
-    "enable_internal_router":true
+    "enable_internal_router":true,
+    "moduling_version": "1.1.3"
 }

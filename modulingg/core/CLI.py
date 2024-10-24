@@ -2,9 +2,10 @@ import cmd
 import os
 import subprocess
 
-from modulingg.controllers.autoload import get_router_endpoints
 from modulingg.controllers.logger import log_message
+from modulingg.core.help import Help
 from modulingg.core.utils import only_manifest, only_modules, print_manifest
+from modulingg.decorators.commandManager import commandManager
 
 FASTAPI_COMMAND_DEV = ["fastapi", "dev", "modulingg/fastapi_core.py"]
 FASTAPI_COMMAND_PR = ["fastapi", "run", "modulingg/fastapi_core.py"]
@@ -14,7 +15,8 @@ fastapi_status = 'FASTAPI_STATUS'
 class CLI(cmd.Cmd):
     intro = "Welcome to Modulingg 📦. Type 'help' or '?' to see the commands.\n"
     prompt = "📦 > "
-
+    
+    @commandManager
     def do_run(self, arg):
         os.environ["FASTAPI_STATUS"] = "multi_module"
         if arg == "dev":
@@ -28,13 +30,15 @@ class CLI(cmd.Cmd):
                 subprocess.run(FASTAPI_COMMAND_PR)
             except KeyboardInterrupt:
                 log_message('INFO', '    Modulingg shutdown.')
-                        
+    
+    @commandManager                   
     def do_clear(self,arg):
         if os.name == 'nt':
             os.system('cls')  # For Windows
         else:
             os.system('clear')  # For macOS/Linux
-                
+    
+    @commandManager     
     def do_info(self, arg):
         all_modules = only_modules()
         if arg == "":
@@ -48,9 +52,10 @@ class CLI(cmd.Cmd):
         except ValueError:
             print(f"The module '{arg}' does not exist in the list.")
 
-
+    @commandManager
     def do_runmodule(self, arg):
         all_modules = only_modules()
+        print(f"All modules: {all_modules}")
         try:
             if arg in all_modules:               
                 fastapi_status = "mono_module" 
@@ -65,8 +70,13 @@ class CLI(cmd.Cmd):
         except KeyboardInterrupt:
             log_message('INFO', '    Modulingg shutdown.')
 
+    @commandManager
+    def do_help(self, arg):
+        Help(arg)
+
     
     # Launch FASTAPI server and return all the endpoints of the module selected
+    @commandManager
     def do_endmodule(self,arg):
         all_modules = only_modules()
         try:
@@ -87,6 +97,7 @@ class CLI(cmd.Cmd):
         print("Goodbye...")
         return True
 
+    @commandManager
     def do_exit(self,arg):
         print("Goodbye...")
         return True

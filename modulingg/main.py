@@ -1,4 +1,4 @@
-from modulingg.core.CLI import CLI
+from .core.CLI import CLI
 
 try:
     CLI().cmdloop()
