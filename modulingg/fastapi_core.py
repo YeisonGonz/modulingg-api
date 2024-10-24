@@ -3,6 +3,7 @@ import sys
 from fastapi import FastAPI
 
 from modulingg.controllers.config import CONFIGURATION
+from modulingg.controllers.logger import endpoints_print
 from modulingg.core.internal_router import load_internal_router
 from modulingg.schemas.basic_response import HostResponse, ModulesListResponse
 from .controllers.autoload import Autoloader 
@@ -21,6 +22,7 @@ if fastapi_status == "mono_module":
 elif fastapi_status == "inspector":
     inspector_module = os.getenv("FASTAPI_MODULE")
     endpoints = autoloader.get_router_endpoints(app, inspector_module)
+    endpoints_print(endpoints,inspector_module)
     sys.exit(0)
 else:
     autoloader.autoload_modules(app)

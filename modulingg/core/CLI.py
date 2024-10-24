@@ -9,6 +9,9 @@ from modulingg.decorators.commandManager import commandManager
 
 FASTAPI_COMMAND_DEV = ["fastapi", "dev", "modulingg/fastapi_core.py"]
 FASTAPI_COMMAND_PR = ["fastapi", "run", "modulingg/fastapi_core.py"]
+FASTAPI_COMMAND_DEV_NOLOG = ["uvicorn", "modulingg.fastapi_core:app", "--log-level", "critical"]
+
+
 
 fastapi_status = 'FASTAPI_STATUS'
 
@@ -85,7 +88,7 @@ class CLI(cmd.Cmd):
                 os.environ["FASTAPI_STATUS"] = fastapi_status
                 os.environ["FASTAPI_MODULE"] = arg
                 
-                out = subprocess.run(FASTAPI_COMMAND_DEV)
+                out = subprocess.run(FASTAPI_COMMAND_DEV_NOLOG)
             else:
                 print(f"The module '{arg}' does not exist in the list.")
         except ValueError:

@@ -56,6 +56,7 @@ Con la aplicación lanzada solo quedara poner el comando para ejecutar FastApi:
 run dev
 ```
 
+Para conocer mas de los comandos de Modulingg puedes usar el comando ```help```
 
 ## Configuración ⚙️
 

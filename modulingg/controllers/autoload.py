@@ -93,7 +93,7 @@ class Autoloader:
                 module_name = module[0]
                 
                 # Search all modules that match the provided moduleName
-                if module_name == f'{MODULES_FOLDER}.{moduleName}.main':
+                if module_name == f'{moduleName}.main':
                     module = importlib.import_module(module_name)
                     fastApiApp.include_router(module.router)
                     completeModule = makeModule(module.router.routes, module_name)
@@ -108,8 +108,7 @@ class Autoloader:
         for module in all_modules:
             try:
                 module_name = module[0]
-
-                if module_name == f'{MODULES_FOLDER}.{moduleName}.main':
+                if module_name == f'{moduleName}.main':
                     module = importlib.import_module(module_name)
                     fastApiApp.include_router(module.router)
                     completeModule = makeModule(module.router.routes, module_name)
