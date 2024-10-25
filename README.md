@@ -60,6 +60,27 @@ Para conocer mas de los comandos de Modulingg puedes usar el comando ```help```
 
 ## Configuración ⚙️
 
+### Modificar la configuración
+
+Hay dos maneras de cambiar los parámetros de configuración en esta aplicación. Una opción es modificar el archivo `config.json` manualmente. Sin embargo, a partir de la versión **1.2**, se ha integrado un comando que facilita la modificación de los parámetros de configuración directamente desde la consola.
+
+#### Uso del Comando `config`
+
+Con el nuevo comando `config`, puedes consultar y actualizar la configuración sin tener que editar el archivo manualmente. A continuación se muestra cómo utilizarlo:
+
+- **Consultar un parámetro**: Para obtener el valor de un parámetro, utiliza el comando `config [key] --get`.
+- **Actualizar un parámetro**: Para modificar un valor, utiliza el comando `config [key] --set [value]`.
+
+Ejemplo:
+
+```bash
+config module_launcher_name --get   # Muestra el valor actual del parámetro module_launcher_name .
+```
+
+```bash
+config module_launcher_name --set init   # Cambia el volor de module_launcher_name
+```
+# Actualiza el valor del parámetro `run` a `dev`.
 ### Lista Blanca 📋
 
 La configuración de la lista blanca permite seleccionar específicamente los módulos que se desean cargar en el sistema. Para habilitar esta opción, ajusta la variable:

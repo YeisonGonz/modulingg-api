@@ -2,6 +2,7 @@ import cmd
 import os
 import subprocess
 
+from modulingg.controllers.config import CONFIGURATION, Config
 from modulingg.controllers.logger import log_message
 from modulingg.core.help import Help
 from modulingg.core.utils import only_manifest, only_modules, print_manifest
@@ -96,6 +97,36 @@ class CLI(cmd.Cmd):
         except KeyboardInterrupt:
             log_message('INFO', '    Modulingg shutdown.')
 
+    @commandManager
+    def do_config(self, arg):
+        args = arg.split()
+        config_params = CONFIGURATION.keys()
+
+        try:
+            if len(args) == 0:
+                print(f"Usage: config [key] --set/--get [value]")
+                return
+
+            if args[0] not in config_params:
+                print(f"Invalid key. Available keys: {', '.join(config_params)}")
+                return
+                
+            if len(args) == 3 and args[1] == "--set":
+                param = args[0]
+                value = args[2]
+                if Config.write_config(param,value):
+                    print(f"The value '{value}' has been saved for the key '{param}'.")
+                else:
+                    print(f"An error occurred while saving the value.")
+                    
+            if len(args) == 2 and args[1] == "--get":
+                print(CONFIGURATION[args[0]])
+        except Exception as e:
+            print(f"An error occurred")
+        except FileNotFoundError:
+            print("The configuration file could not be found.")
+            
+            
     def do_EOF(self,arg):
         print("Goodbye...")
         return True
