@@ -1,0 +1,10 @@
+{
+    "help": "Displays a list of all available commands, or provides detailed information for a specified command. Usage: 'help [command]' or simply 'help' to view all.",
+    "config": "Manages configuration settings. Use '--get' to view the current setting of a specified parameter or '--set' to change it. Usage: 'config [key] --set [value]' or 'config [key] --get'.",
+    "run": "Starts the FastAPI server. Use 'dev' to launch in development mode with real-time updates, or 'pr' for production mode with optimized performance. Usage: 'run dev' or 'run pr'.",
+    "clear": "Clears the console screen of any previous output, improving visibility. Compatible with Windows, macOS, and Linux. Usage: 'clear'.",
+    "info": "Displays detailed information about a specified module, including its version, dependencies, and description. Requires the module name as an argument. Usage: 'info [module_name]'.",
+    "runmodule": "Runs a FastAPI server in single-module mode, allowing you to test a specific module in isolation. Specify the module name as an argument. Usage: 'runmodule [module_name]'.",
+    "endmodule": "Launches FastAPI in inspector mode for a specific module, displaying a list of all available endpoints for that module. Requires the module name as an argument. Usage: 'endmodule [module_name]'.",
+    "exit": "Exits the CLI application, ending the current session and closing any running background processes. Usage: 'exit'."
+}

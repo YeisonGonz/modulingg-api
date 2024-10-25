@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='modulingg', 
-    version='1.2.2',
+    name='modulingg',
+    version='1.2.3',
     packages=find_packages(),
     install_requires=[
         "fastapi[standard]",

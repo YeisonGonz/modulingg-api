@@ -5,6 +5,7 @@ from pydantic import BaseModel, Field
 
 CONFIG_FILE = 'modulingg/config/config.json'
 COMMANDS_DIRECTORY_FILE = 'modulingg/config/commands.json'
+COMMANDS_DIRECTORY_HELP_FILE = 'modulingg/config/commandhelp.json'
 
 
 class Config:
@@ -41,6 +42,12 @@ class CommandsDictionary:
         with open(COMMANDS_DIRECTORY_FILE, 'r') as file:
             data = json.load(file)
         return data
+    
+class CommandsDictionaryHelp:
+    def read_config():
+        with open(COMMANDS_DIRECTORY_HELP_FILE, 'r') as file:
+            data = json.load(file)
+        return data    
 
 CONFIGURATION = Config().read_config()
 
