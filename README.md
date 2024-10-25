@@ -80,7 +80,7 @@ config module_launcher_name --get   # Muestra el valor actual del parámetro mod
 ```bash
 config module_launcher_name --set init   # Cambia el volor de module_launcher_name
 ```
-# Actualiza el valor del parámetro `run` a `dev`.
+
 ### Lista Blanca 📋
 
 La configuración de la lista blanca permite seleccionar específicamente los módulos que se desean cargar en el sistema. Para habilitar esta opción, ajusta la variable:
