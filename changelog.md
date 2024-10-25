@@ -1,6 +1,6 @@
 # Changelog 📜
 
-Todos los cambios de **Modulingg 📦 se iran registrando en este documento
+Todos los cambios de **Modulingg 📦** se iran registrando en este documento
 
 ## 1.2.2 
 
