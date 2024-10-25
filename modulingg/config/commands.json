@@ -1,6 +1,6 @@
 {
     "help": "You can see all available commands.",
-    "config": "Allows you to change alld configuration",
+    "config": "Allows you to change all configuration",
     "run": "Execute FastAPI, it can be in development mode <dev> or production mode <pr>.",
     "clear": "Clear the console",
     "info": "Display information about a module",

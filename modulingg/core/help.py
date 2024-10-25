@@ -10,7 +10,7 @@ class Help:
         if command and command in commandList:
             print(BROADCAST_MESSAGE_COMMAND.format(command))
         else:
-            print(BROADCAST_MESSAGE.format(CONFIGURATION['moduling_version']))
+            print(BROADCAST_MESSAGE.format(CONFIGURATION['modulingg_version']))
             self._returnCommands(commandList)
         
     def _returnCommands(self, commands_list):
