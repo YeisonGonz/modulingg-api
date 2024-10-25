@@ -4,6 +4,8 @@
 
 Modulatingg API es una base sólida diseñada para facilitar la creación de un backend escalable y organizado utilizando Python y FastAPI 🐍. La idea es proporcionar un entorno plug-and-play en el que los desarrolladores puedan construir módulos independientes con la estructura adecuada. Una vez configurados, solo es necesario añadir estos módulos a la carpeta correspondiente para que funcionen de inmediato.
 
+Para poder ver el avance de la aplicación puedes consultar el fichero [Changelog](changelog.md)
+
 ## Como empezar a programar ? 🧑‍💻
 
 Para iniciar con el desarrollo, sigue estos pasos:
