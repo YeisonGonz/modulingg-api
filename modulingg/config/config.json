@@ -4,5 +4,7 @@
     "module_launcher_name": "main",
     "modules_folder_name": "modules",
     "enable_internal_router":true,
-    "modulingg_version": "1.2.3"
+    "modulingg_version": "1.2.3",
+    "launcher_fastapi_host": "0.0.0.0",
+    "launcher_fastapi_port": 8000
 }

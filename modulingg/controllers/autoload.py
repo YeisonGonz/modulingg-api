@@ -3,6 +3,7 @@ import os
 import sys
 from typing import List
 
+from fastapi import FastAPI
 from pydantic import BaseModel
 
 from modulingg.controllers.config import CONFIGURATION, Config, Manifest
@@ -103,20 +104,22 @@ class Autoloader:
                     
                                 
     # Return a list of all endpoints in a module.
-    def get_router_endpoints(self,fastApiApp,moduleName):
+    def get_router_endpoints(self, moduleName):
         all_modules = self.search_modules() 
+        temp_app = FastAPI()
+        
         for module in all_modules:
             try:
                 module_name = module[0]
                 if module_name == f'{moduleName}.main':
                     module = importlib.import_module(module_name)
-                    fastApiApp.include_router(module.router)
+                    temp_app.include_router(module.router)
                     completeModule = makeModule(module.router.routes, module_name)
                     return completeModule.endpoints
             except Exception as e:
                 log_message('ERROR', f"Error loading module {module_name} ❌ ({str(e)})")
         
-        return 
+        return None
 
 
 class ModuleVerifier(BaseModel):

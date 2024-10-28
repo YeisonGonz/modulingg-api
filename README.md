@@ -115,10 +115,28 @@ Configura aquí las opciones relativas a los módulos.
 
 Configura aqui las opciones del router.
 
-- **Habilita/Deshabilita que se cargue el router interno.**:
+- **Habilita/Deshabilita que se cargue el router interno**:
   - **`enable_internal_router`**:
     - **Tipo**: `boolean`
     - **Valor predeterminado**: `true`
+
+
+### Launcher 🚀
+
+Configura las opciones del 'Launcher' de FastAPI.
+
+- **Establece que direccion tiene permitido el host de acceso**:
+  - **`launcher_fastapi_host`**:
+    - **Tipo**: `string ip`
+    - **Valor predeterminado**: `0.0.0.0` # Cualquier direccción
+
+
+- **Puerto donde se ejecutara la aplicacion**:
+  - **`launcher_fastapi_port`**:
+    - **Tipo**: `integer`
+    - **Valor predeterminado**: `8000`
+
+
 
 ## Módulos 📦
 
