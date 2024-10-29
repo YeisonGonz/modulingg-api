@@ -1,6 +1,5 @@
 import cmd
 import os
-import subprocess
 
 from modulingg.controllers.config import CONFIGURATION, Config
 from modulingg.controllers.logger import log_message
@@ -55,7 +54,6 @@ class CLI(cmd.Cmd):
     @commandManager
     def do_runmodule(self, arg):
         all_modules = only_modules()
-        print(f"All modules: {all_modules}")
         try:
             if arg in all_modules:               
                 fastapi_status = "mono_module" 

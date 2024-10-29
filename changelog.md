@@ -2,6 +2,16 @@
 
 Todos los cambios de **Modulingg 📦** se iran registrando en este documento
 
+## 1.3.1
+
+Publicada el 29-10-2024
+
+### Arreglo
+
+- Conflicto en el versionado interno
+
+- Eliminacion de librerias sin uso
+
 ## 1.3.0 
 
 Publicada el 28-10-2024
