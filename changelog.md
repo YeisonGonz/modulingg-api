@@ -2,6 +2,15 @@
 
 Todos los cambios de **Modulingg 📦** se iran registrando en este documento
 
+## 1.3.2
+
+Publicada el 30-10-2024
+
+### Arreglo
+
+- Prefix custom para los endpoints internos de **Modulingg 📦**
+
+
 ## 1.3.1
 
 Publicada el 29-10-2024
