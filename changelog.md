@@ -2,6 +2,17 @@
 
 Todos los cambios de **Modulingg 📦** se iran registrando en este documento
 
+## 1.4.0
+
+### Agregado
+
+- Nuevo comando 'module', que permite realizar varias operaciones con los módulos instalados:
+    - Copiar un módulo existente
+    - Eliminar un módulo existente
+    - Crear un módulo predeterminado
+    - Listar todos los módulos instalados
+
+
 ## 1.3.2
 
 Publicada el 30-10-2024

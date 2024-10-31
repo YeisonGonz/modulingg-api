@@ -15,7 +15,12 @@ class Help:
             self._returnCommands(commandList)
         
     def _returnCommands(self, commands_list):
-        commands_dict = CommandsDictionary().read_config()
-        for command in commands_list:
-            print(f'\t{command}: {commands_dict[command]}')
-        print('\n\n')
+        try:
+            commands_dict = CommandsDictionary().read_config()
+            for command in commands_list:
+                print(f'\t{command}: {commands_dict[command]}')
+            print('\n\n')
+        except FileNotFoundError:
+            print('Error: Unable to find the configuration file.')
+        except KeyError:
+            print('Error: To find command help')

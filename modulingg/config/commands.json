@@ -6,5 +6,6 @@
     "info": "Display information about a module",
     "runmodule": "Run a FastAPI development environment specifying the module you want to test.",
     "endmodule": "You can view all Endpoints of a specific module",
+    "module": " You can manage the modules, can create default ones 'make', list all modules 'list', copy an existing module 'copy' <module_name> or delete a module 'delete' <module_name>",
     "exit": "Exit"
 }

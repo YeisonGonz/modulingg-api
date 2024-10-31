@@ -6,5 +6,7 @@
     "info": "Displays detailed information about a specified module, including its version, dependencies, and description. Requires the module name as an argument. Usage: 'info [module_name]'.",
     "runmodule": "Runs a FastAPI server in single-module mode, allowing you to test a specific module in isolation. Specify the module name as an argument. Usage: 'runmodule [module_name]'.",
     "endmodule": "Launches FastAPI in inspector mode for a specific module, displaying a list of all available endpoints for that module. Requires the module name as an argument. Usage: 'endmodule [module_name]'.",
-    "exit": "Exits the CLI application, ending the current session and closing any running background processes. Usage: 'exit'."
+    "exit": "Exits the CLI application, ending the current session and closing any running background processes. Usage: 'exit'.",
+    "module": "Manage available modules. You can perform the following actions: \n\t- Create default modules: 'make' \n\t- List all modules: 'list' \n\t- Copy an existing module: 'copy <module_name>' \n\t- Delete a module: 'delete <module_name>'"
+
 }

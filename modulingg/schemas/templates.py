@@ -1,0 +1,1 @@
+MODULE_LIST_TEMPLATE = "📦 - {}\n\tName: {}\n\tShort name: {}\n\tDescription: {}\n\tAuthor: {}\n\tVersion: {}"

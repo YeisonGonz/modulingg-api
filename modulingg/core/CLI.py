@@ -1,6 +1,7 @@
 import cmd
 import os
 
+from modulingg.controllers.ModuleManager import ModuleManager
 from modulingg.controllers.config import CONFIGURATION, Config
 from modulingg.controllers.logger import log_message
 from modulingg.core.Launcher import Launcher
@@ -119,6 +120,22 @@ class CLI(cmd.Cmd):
             print(f"An error occurred")
         except FileNotFoundError:
             print("The configuration file could not be found.")
+    
+    @commandManager
+    def do_module(self,arg):
+        try:
+            module_manager = ModuleManager()
+            args = arg.split()
+            if args[0] == 'make':
+                module_manager.makeDefaultModules()
+            if args[0] == 'list':
+                module_manager.moduleList()
+            if args[0] == 'copy' and args[1]:
+                module_manager.copyModule(args[1])
+            if args[0] == 'remove' and args[1]:
+                module_manager.deleteModule(args[1])
+        except Exception as e:
+            print(e)
             
             
     def do_EOF(self,arg):
