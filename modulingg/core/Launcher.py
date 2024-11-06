@@ -20,5 +20,10 @@ class Launcher:
             uvicorn.run(self.FASTAPI_MODULE_NAME, port=8000, host=self.FASTAPI_HOST)
         elif mode == "inspector":
             subprocess.run(self.FASTAPI_COMMAND_DEV_NOLOG)
+    
+    
+def run():
+    launcher = Launcher()
+    launcher.launchApp('development')
             
     
