@@ -6,6 +6,6 @@
     "enable_internal_router": true,
     "modulingg_version": "1.4.0",
     "launcher_fastapi_host": "0.0.0.0",
-    "launcher_fastapi_port": 8000,
+    "launcher_fastapi_port": 9000,
     "modulingg_prefix": "/modulingg"
 }

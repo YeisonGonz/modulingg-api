@@ -2,8 +2,10 @@ import zipfile
 import shutil
 
 from modulingg.controllers.autoload import Autoloader
-from modulingg.controllers.config import CONFIGURATION
+from modulingg.controllers.config import DynamicConfig
 from modulingg.schemas.templates import MODULE_LIST_TEMPLATE
+
+config = DynamicConfig()
 
 class ModuleManager():
     DEFAULT_MODULE_ZIPFILE = 'modulingg/resources/df-md.zip'  
@@ -18,12 +20,12 @@ class ModuleManager():
     def makeDefaultModules():
         try:
             with zipfile.ZipFile(ModuleManager.DEFAULT_MODULE_ZIPFILE, 'r') as zip_ref:
-                zip_ref.extractall(CONFIGURATION['modules_folder_name'])
-            print(f"Default modules have been successfully created in '{CONFIGURATION['modules_folder_name']}'.")
+                zip_ref.extractall(config.get('modules_folder_name'))
+            print(f"Default modules have been successfully created in '{config.get('modules_folder_name')}'.")
         except FileNotFoundError:
             print(f"The module zip file '{ModuleManager.DEFAULT_MODULE_ZIPFILE}' does not exist.")
         except PermissionError as e:
-            print(f"Permission denied to open the '{CONFIGURATION['modules_folder_name']}' folder. ({str(e)})")
+            print(f"Permission denied to open the '{config.get('modules_folder_name')}' folder. ({str(e)})")
     
     
     def moduleList(self):
@@ -34,7 +36,7 @@ class ModuleManager():
     # Copy a module folder
     def copyModule(self, moduleToCopy):
         try:
-            module_copy_path = f"{CONFIGURATION['modules_folder_name']}/{moduleToCopy}"
+            module_copy_path = f"{config.get('modules_folder_name')}/{moduleToCopy}"
             shutil.copytree(module_copy_path,module_copy_path+'_copy')
             print(f"Module '{moduleToCopy}' has been successfully copied.")
         except OSError:
@@ -45,7 +47,7 @@ class ModuleManager():
     # Delete a module folder
     def deleteModule(self, moduleToDelete):
         try:
-            module_delete_path = f"{CONFIGURATION['modules_folder_name']}/{moduleToDelete}"
+            module_delete_path = f"{config.get('modules_folder_name')}/{moduleToDelete}"
             shutil.rmtree(module_delete_path)
             print(f"Module '{moduleToDelete}' has been successfully delete.")
         except FileNotFoundError:

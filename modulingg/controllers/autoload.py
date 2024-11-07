@@ -6,12 +6,14 @@ from typing import List
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-from modulingg.controllers.config import CONFIGURATION, Config, Manifest
+from modulingg.controllers.config import Config, DynamicConfig, Manifest
 from modulingg.controllers.logger import log_message
 from modulingg.schemas.basic_response import Module
 
-MODULES_FOLDER = CONFIGURATION['modules_folder_name']
-INIT_FILE = CONFIGURATION['module_launcher_name']
+config = DynamicConfig()
+
+MODULES_FOLDER = config.get('modules_folder_name')
+INIT_FILE = config.get('module_launcher_name')
 
 class Autoloader:
     
@@ -47,13 +49,13 @@ class Autoloader:
         
         log_message('INFO', f'Starting Modulingg 📦')
         log_message('INFO', f'Searching for modules in {MODULES_FOLDER}...')
-        module_whitelist_status = CONFIGURATION['module_whitelist']
+        module_whitelist_status = config.get('module_whitelist')
         
         # Load all modules, either from the whitelist or all available. 
         all_modules = self.search_modules()
 
         if module_whitelist_status:
-            enabled_modules = CONFIGURATION['enabled_modules_whitelist']
+            enabled_modules = config.get('enabled_modules_whitelist')
             enabled_modules_in_all = [module for module in all_modules if module in enabled_modules]
             loaded_modules = self.include_module_list(enabled_modules_in_all,fastApiApp)
         else:

@@ -1,1 +1,1 @@
-from config import DynamicConfig as config
+from modulingg.controllers.config import DynamicConfig as config

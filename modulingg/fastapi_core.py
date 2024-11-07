@@ -2,7 +2,7 @@ import os
 import sys
 from fastapi import FastAPI
 
-from modulingg.controllers.config import CONFIGURATION
+from modulingg.controllers.config import DynamicConfig
 from modulingg.controllers.logger import endpoints_print
 from modulingg.core.internal_router import load_internal_router
 from .controllers.autoload import Autoloader 
@@ -10,9 +10,10 @@ from .controllers.autoload import Autoloader
 app = FastAPI()
 fastapi_status = os.getenv("FASTAPI_STATUS", "multi_module")
 
+config = DynamicConfig()
 autoloader = Autoloader()
 
-if CONFIGURATION['enable_internal_router']:
+if config.get('enable_internal_router'):
     load_internal_router(app)
 
 if fastapi_status == "mono_module":

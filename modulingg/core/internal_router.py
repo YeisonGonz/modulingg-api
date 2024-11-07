@@ -1,11 +1,12 @@
 from fastapi import APIRouter
 from modulingg.controllers.autoload import Autoloader
-from modulingg.controllers.config import CONFIGURATION
+from modulingg.controllers.config import DynamicConfig
 
 autoloader = Autoloader()
 router = APIRouter()
+config = DynamicConfig()
 
-modulingg_prefix = CONFIGURATION['modulingg_prefix']
+modulingg_prefix = config.get('modulingg_prefix')
 
 # Simple internal router with the basic operations
 

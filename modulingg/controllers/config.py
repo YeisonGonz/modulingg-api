@@ -38,20 +38,27 @@ class Config:
             print("Error to read the JSON file.")
 
 
+# This interface is used inn mode Library, no in internal settings
 class ConfigInterface:
-    
     @staticmethod
     def set(param, value):
-        Config.write_config(param, value)
+        tempConfig = DynamicConfig()
+        tempConfig.set(param, value)
 
-class DynamicConfig: 
+class DynamicConfig:
+    _instance = None  
 
-    def __init__(self) -> None:
-        self.all_config = copy.copy(CONFIGURATION)
-        pass
-    
-    def get(self,key):
-        return self.all_config[key]
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(DynamicConfig, cls).__new__(cls)
+            cls._instance.all_config = copy.copy(CONFIGURATION)
+        return cls._instance
+
+    def get(self, key):
+        return self.all_config.get(key)
+
+    def set(self, key, value):
+        self.all_config[key] = value
 
 class CommandsDictionary:
     def read_config(self):

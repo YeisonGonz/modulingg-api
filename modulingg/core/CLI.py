@@ -2,7 +2,7 @@ import cmd
 import os
 
 from modulingg.controllers.ModuleManager import ModuleManager
-from modulingg.controllers.config import CONFIGURATION, Config
+from modulingg.controllers.config import CONFIGURATION, Config, DynamicConfig
 from modulingg.controllers.logger import log_message
 from modulingg.core.Launcher import Launcher
 from modulingg.core.help import Help
