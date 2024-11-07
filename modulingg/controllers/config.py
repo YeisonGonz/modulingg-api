@@ -1,6 +1,7 @@
 import json
-from typing import Optional
+import copy
 
+from typing import Optional
 from pydantic import BaseModel, Field
 
 CONFIG_FILE = 'modulingg/config/config.json'
@@ -36,6 +37,21 @@ class Config:
         except json.JSONDecodeError:
             print("Error to read the JSON file.")
 
+
+class ConfigInterface:
+    
+    @staticmethod
+    def set(param, value):
+        Config.write_config(param, value)
+
+class DynamicConfig: 
+
+    def __init__(self) -> None:
+        self.all_config = copy.copy(CONFIGURATION)
+        pass
+    
+    def get(self,key):
+        return self.all_config[key]
 
 class CommandsDictionary:
     def read_config(self):

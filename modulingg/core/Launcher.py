@@ -21,9 +21,14 @@ class Launcher:
         elif mode == "inspector":
             subprocess.run(self.FASTAPI_COMMAND_DEV_NOLOG)
     
-    
-def run():
-    launcher = Launcher()
-    launcher.launchApp('development')
-            
-    
+
+class LauncherInterface:
+    @staticmethod
+    def dev():
+        temp_launcher = Launcher()
+        temp_launcher.launchApp('development')
+
+    @staticmethod
+    def run():
+        temp_launcher = Launcher()
+        temp_launcher.launchApp('production')    
