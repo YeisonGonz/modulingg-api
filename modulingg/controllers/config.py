@@ -4,6 +4,10 @@ import copy
 from typing import Optional
 from pydantic import BaseModel, Field
 
+# These are all default values, they can be permanently changed via the Config interface,
+# the safest way to modify the configuration is at run time, via the ConfigInterface interface and 
+# DynamicConfig it is made to modify and obtain configuration internally.
+
 CONFIG_FILE = 'modulingg/config/config.json'
 COMMANDS_DIRECTORY_FILE = 'modulingg/config/commands.json'
 COMMANDS_DIRECTORY_HELP_FILE = 'modulingg/config/commandhelp.json'
