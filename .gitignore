@@ -4,3 +4,4 @@ __pycache__/
 modulingg.egg-info/
 venv-w/
 test-port.py
+modulingg/metrics/*
