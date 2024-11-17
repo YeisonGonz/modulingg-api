@@ -1,4 +1,3 @@
-import contextvars
 import os
 import sys
 
@@ -14,8 +13,6 @@ fastapi_status = os.getenv("FASTAPI_STATUS", "multi_module")
 
 config = DynamicConfig()
 autoloader = Autoloader()
-
-request_info_var = contextvars.ContextVar("request_info")
 
 app.add_middleware(RequestInfoMiddleware)
 
