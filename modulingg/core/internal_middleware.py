@@ -12,7 +12,8 @@ class RequestInfoMiddleware(BaseHTTPMiddleware):
             "ip": request.client.host,
             "method": request.method,
             "url": str(request.url),
-            "params": dict(request.query_params)
+            "params": dict(request.query_params),
+            "headers": dict(request.headers)
         }
 
         metrics.append_metric_value(request_info)

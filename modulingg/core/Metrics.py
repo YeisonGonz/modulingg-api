@@ -1,4 +1,5 @@
 import os
+import zipfile
 
 class MetricManager:
 
@@ -85,6 +86,34 @@ class MetricManager:
 
     def append_metric_value(self, metric_data):
         return self._make_new_metric(metric_data)
-        
+    
+    def remove_all_metric(self):
+        try:
+            for file in os.listdir(self.metric_data_folder):
+                file_path = os.path.join(self.metric_data_folder, file)
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+            
+            if os.listdir(self.metric_data_folder) != []:
+                return False
+            
+            return True
+        except PermissionError as e:
+            print('MetricManager dont have permission.',e)
+
+    def compress_metrics(self):
+        try:
+            # Compress all metrics in a ZIP
+            with zipfile.ZipFile('compresed_metrics.zip', 'w') as zip_file:
+                for file in os.listdir(self.metric_data_folder):
+                    file_path = os.path.join(self.metric_data_folder, file)
+                    if os.path.isfile(file_path):
+                        zip_file.write(self.metric_data_folder, arcname=file)
+            
+            return True
+        except Exception as e:
+            print(f"Failed to compress files: {e}")
+            return False
+
 
     
