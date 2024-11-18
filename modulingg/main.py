@@ -1,7 +1,2 @@
-from .core.CLI import CLI
-
-try:
-    CLI().cmdloop()
-except KeyboardInterrupt:
-    print("Goodbye...")
-    
+from core.Launcher import LauncherInterface
+LauncherInterface.dev()

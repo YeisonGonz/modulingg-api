@@ -1,1 +1,0 @@
-from modulingg.controllers.config import DynamicConfig as config
