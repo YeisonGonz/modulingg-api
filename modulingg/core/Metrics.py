@@ -60,8 +60,19 @@ class MetricManager:
             return False
         except FileNotFoundError as e:
             print('Create a metrics folder', e)
+            if self._make_default_metric(metric_data):
+                return True
             return False
-       
+        
+    def _make_default_metric(self, metric_data): 
+        try:
+            with open(f"{self.metric_data_folder}/{self.metric_data_basefilename+'0000'}", "a") as file:
+                file.write(str(metric_data) + '\n')
+            return True
+        except PermissionError as e:
+            print('MetricManager dont have permission.', e)
+            return False
+
 
     def _get_entry_metric_file(self, metric_file):
         try:
