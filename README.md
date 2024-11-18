@@ -22,43 +22,32 @@ python -m venv path/to/venv
 
 # Activar el entorno virtual de Python
 source path/to/venv/bin/activate
+
+# Instalar todas las dependencias
+pip install -r requirements.txt
 ```
 
+Con solo ejecutar el ```main.py```  dentro de la carpeta del proyecto ya podras lanzar el proyecto yempezar a desarrollar.
 
-Ahora tendras el entorno virtual de Python activado, podras ver un distintivo en la consola, con el nombre del entorno virtual.
 
-Y ahora solo quedara instalar **FastApi** y ejecutar el proyecto
+## Docker
 
-```bash
-# Instala FastAPI
-pip install "fastapi[standard]"
+En el proyecto se incluye lo necesario para poder ejecutar el proyecto en un contenedor de Docker.
 
-# Esto solo se aplica para la version 1.0
-# Ejecutar el proyecto FastApi en modo desarrollo
-fastapi dev 
-```
-
-Para las versiones 1.1 y en adelante se ha integrado una CLI interna, para hacer mas sencillo la ejecucion del entorno y poder agregar en un futuro nuevas funcionalidades mas amplias y complejas.
-
-Solo deberas ejecutar instalar la aplicación como un paquete y ya podras desarrollar, con el siguiente comando:
-
-```bash
-# Se instalara modulingg como un paquete
-pip install -e .
-
-# Para abrir abrir la aplicación
-modulingg 
-```
-
-Con la aplicación lanzada solo quedara poner el comando para ejecutar FastApi:
+Solo es necesario ejecutar este comando la primera vez, esto lo que hara es construir la imagen con todas las dependencias del proyecto, si en un futuro instalas mas dependencias deberas volver a generar el `requirements.txt` desde tu entorno virtual de desarrollo.
 
 
 ```bash
-# Lanzara FastApi junto a los modulos de la carpeta './modules'
-run dev
+docker compose up --build
 ```
 
-Para conocer mas de los comandos de Modulingg puedes usar el comando ```help```
+Y las siguientes ejecuciones solo llega con:
+
+```bash
+docker compose up -d # -d : Omite la salida por consola
+```
+
+
 
 ## Configuración ⚙️
 

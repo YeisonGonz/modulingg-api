@@ -2,6 +2,14 @@
 
 Todos los cambios de **Modulingg 📦** se iran registrando en este documento
 
+## 2.0.0
+
+### Agregado
+
+- Implementacion de un sistema para almacenar metrics para poder realizar estadisticas
+- Implementacion para poder ejecutar el entorno en Docker
+
+
 ## 1.4.0
 
 ### Agregado
