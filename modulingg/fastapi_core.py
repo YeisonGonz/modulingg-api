@@ -1,9 +1,10 @@
 import os
 import sys
-from fastapi import FastAPI
 
+from fastapi import FastAPI, Request
 from modulingg.controllers.config import DynamicConfig
 from modulingg.controllers.logger import endpoints_print
+from modulingg.core.internal_middleware import RequestInfoMiddleware
 from modulingg.core.internal_router import load_internal_router
 from .controllers.autoload import Autoloader 
 
@@ -12,6 +13,8 @@ fastapi_status = os.getenv("FASTAPI_STATUS", "multi_module")
 
 config = DynamicConfig()
 autoloader = Autoloader()
+
+app.add_middleware(RequestInfoMiddleware)
 
 if config.get('enable_internal_router'):
     load_internal_router(app)
