@@ -16,7 +16,7 @@ class RequestInfoMiddleware(BaseHTTPMiddleware):
             "headers": dict(request.headers)
         }
 
-        metrics.append_metric_value(request_info)
+        metrics.append_metric_value(request_info)        
 
         response = await call_next(request)
         return response

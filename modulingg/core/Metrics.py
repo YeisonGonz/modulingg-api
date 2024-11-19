@@ -1,5 +1,6 @@
 import os
 import zipfile
+import json
 
 class MetricManager:
 
@@ -10,6 +11,7 @@ class MetricManager:
     def __init__(self) -> None:
         self.metric_data_folder = './modulingg/metrics'
         self.metric_data_basefilename = 'metric_'
+        self.metric_format = '.jsonl'
 
     def _get_last_metricname(self):
         try:
@@ -46,14 +48,14 @@ class MetricManager:
             directory = self.metric_data_folder
             if not os.path.exists(directory):
                 os.makedirs(directory)
-                
+            
             if self._get_entry_metric_file(last_metric_name) >= 100:
                 with open(f"{directory}/{new_metric_name}", "w") as file:
-                    file.write(str(metric_data) + '\n')
+                    file.write(json.dumps(metric_data) + '\n')
                 return True
             
             with open(f"{directory}/{last_metric_name}", "a") as file:
-                file.write(str(metric_data) + '\n')
+                file.write(json.dumps(metric_data) + '\n')
             return True
             
         except PermissionError as e:
@@ -114,6 +116,25 @@ class MetricManager:
         except Exception as e:
             print(f"Failed to compress files: {e}")
             return False
+        
+    @staticmethod
+    def convert_to_jsonl(input_file: str, output_file: str):
+        try:
+            with open(input_file, "r") as infile:
+                data = json.load(infile)
+
+            if not isinstance(data, list):
+                raise ValueError("El archivo JSON no contiene un arreglo de objetos.")
+
+            # Escribir en formato JSONL
+            with open(output_file, "w") as outfile:
+                for obj in data:
+                    json_line = json.dumps(obj)  # Convertir cada objeto a línea JSON
+                    outfile.write(json_line + "\n")
+
+        
+        except Exception as e:
+            print(f"Error durante la conversión: {e}")
 
 
     
