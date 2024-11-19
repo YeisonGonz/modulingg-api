@@ -2,12 +2,13 @@ from fastapi import APIRouter
 from modulingg.controllers.autoload import Autoloader
 from modulingg.controllers.config import DynamicConfig
 from modulingg.core.Analytics import Analytics
+from fastapi.responses import StreamingResponse
 
 autoloader = Autoloader()
 router = APIRouter()
 config = DynamicConfig()
 analytics_obj = Analytics()
-
+analytics_manager = Analytics()
 modulingg_prefix = config.get('modulingg_prefix')
 
 # Simple internal router with the basic operations
@@ -31,6 +32,13 @@ async def health():
 @router.get('/analytics')
 async def analytics():
     return analytics_obj.load_analytics().to_string(index=False)
+
+
+@router.get('/graph')
+async def analytics():
+    graph = analytics_manager.make_graph_analytics_endpoints(analytics_manager.load_analytics())
+    return StreamingResponse(graph, media_type="image/png")
+
 
 
 def load_internal_router(app):

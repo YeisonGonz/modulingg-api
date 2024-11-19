@@ -70,7 +70,7 @@ class MetricManager:
     def _make_default_metric(self, metric_data): 
         try:
             with open(f"{self.metric_data_folder}/{self.metric_data_basefilename+'0000'}", "a") as file:
-                file.write(str(metric_data) + '\n')
+                file.write(json.dumps(metric_data) + '\n')
             return True
         except PermissionError as e:
             print('MetricManager dont have permission.', e)

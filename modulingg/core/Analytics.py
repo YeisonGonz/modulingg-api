@@ -1,4 +1,6 @@
+import io
 import json
+import matplotlib.pyplot as plt
 import pandas as pd
 
 from modulingg.core.Metrics import MetricManager 
@@ -20,3 +22,19 @@ class Analytics:
             return df
         except ValueError as e:
             print(f"Failed to load metrics data: {e}")
+            
+    def make_graph_analytics_endpoints(self, df_analytics):
+        df_analytics['url'] = df_analytics['url'].str.replace('http://127.0.0.1:8100', '', regex=False)
+        df_grouped = df_analytics.groupby(['url']).size().reset_index(name='count')
+
+        plt.figure(figsize=(15,5))
+        plt.bar(x=df_grouped['url'].values,height=df_grouped['count'].values, width=0.4,color='red',edgecolor='k',alpha=0.6)
+        plt.xticks(fontsize=12,rotation=0)
+        plt.yticks(fontsize=10)
+        img_stream = io.BytesIO()
+        plt.tight_layout()
+        plt.savefig(img_stream, format='png')
+        img_stream.seek(0)
+        plt.close()
+        
+        return img_stream
