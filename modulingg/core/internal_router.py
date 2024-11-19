@@ -39,6 +39,11 @@ async def analytics():
     graph = analytics_manager.make_graph_analytics_endpoints(analytics_manager.load_analytics())
     return StreamingResponse(graph, media_type="image/png")
 
+@router.get('/graph_ip')
+async def analytics():
+    graph = analytics_manager.make_graph_analytics_by_ip(analytics_manager.load_analytics())
+    return StreamingResponse(graph, media_type="image/png")
+
 
 
 def load_internal_router(app):
