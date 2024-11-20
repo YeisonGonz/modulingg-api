@@ -48,7 +48,7 @@ class Analytics:
         return img_stream
             
     def make_graph_analytics_endpoints(self, df_analytics):
-        df_analytics['url'] = df_analytics['url'].str.replace('http://127.0.0.1:8100', '', regex=False)
+        df_analytics['url'] = df_analytics['url'].str.replace(r'^https?://[^/]+', '', regex=True)
         df_grouped = df_analytics.groupby(['url']).size().reset_index(name='count')
         
         return self._make_graph(df_grouped['url'].values, df_grouped['count'].values)
