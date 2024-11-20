@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from modulingg.controllers.autoload import Autoloader
 from modulingg.controllers.config import DynamicConfig
 from modulingg.core.Analytics import Analytics
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse,HTMLResponse
 
 autoloader = Autoloader()
 router = APIRouter()
@@ -29,9 +29,11 @@ async def health():
 async def health():
     return {"status": "healthy"}
 
-@router.get('/analytics')
+@router.get('/analytics',response_class=HTMLResponse)
 async def analytics():
-    return analytics_obj.load_analytics().to_string(index=False)
+    with open("modulingg/static/analytics.html", "r", encoding="utf-8") as file:
+        html_content = file.read()
+    return html_content
 
 
 @router.get('/graph')

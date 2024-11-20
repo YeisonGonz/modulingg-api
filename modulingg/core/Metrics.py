@@ -27,6 +27,16 @@ class MetricManager:
             print('MetricManager dont have permission.',e)
             return None
 
+    def _get_all_metrics(self):
+        try:
+            all_files_name = os.listdir(self.metric_data_folder)
+            return all_files_name
+        except FileNotFoundError:
+            return None
+        except PermissionError as e:
+            print('MetricManager dont have permission.',e)
+            return None
+    
     def _calculate_hash_name(self, last_metric_name):
         try:
             last_hash = int(last_metric_name.split(self.metric_data_basefilename)[1])

@@ -11,22 +11,32 @@ class Analytics:
         self.metrics_object = MetricManager()
 
     def load_analytics(self):
-        last_metric_name = self.metrics_object._get_last_metricname()
-        metric_file_name = f"{self.metrics_object.metric_data_folder}/{last_metric_name}"
-        output_file_name = metric_file_name.replace(".json", ".jsonl") # Converted file lives in execution time. 
+        all_metric_names = self.metrics_object._get_all_metrics()
+        dataframes = []
+        
+        for metric_name in all_metric_names:
+            metric_file_name = f"{self.metrics_object.metric_data_folder}/{metric_name}"
+            output_file_name = metric_file_name.replace(".json", ".jsonl")  
 
-        self.metrics_object.convert_to_jsonl(metric_file_name, output_file_name)
+            self.metrics_object.convert_to_jsonl(metric_file_name, output_file_name)
 
-        try:
-            df = pd.read_json(output_file_name, lines=True)
-            return df
-        except ValueError as e:
-            print(f"Failed to load metrics data: {e}")
+            try:
+                df = pd.read_json(output_file_name, lines=True)
+                dataframes.append(df)
+            except ValueError as e:
+                print(f"Failed to load metrics data from {output_file_name}: {e}")
+
+        if dataframes:
+            combined_df = pd.concat(dataframes, ignore_index=True)
+            return combined_df
+        else:
+            print("No data was loaded. Returning an empty DataFrame.")
+            return pd.DataFrame()
             
             
     def _make_graph(self,x_values, y_values):
         plt.figure(figsize=(15,5))
-        plt.bar(x=x_values,height=y_values, width=0.4,color='blue',edgecolor='k',alpha=0.6)
+        plt.bar(x=x_values,height=y_values, width=0.4,color='red',edgecolor='k',alpha=0.6)
         plt.xticks(fontsize=12,rotation=45)
         plt.yticks(fontsize=10)
         img_stream = io.BytesIO()
