@@ -1,5 +1,6 @@
 import subprocess
 import uvicorn
+import os
 
 from controllers.config import DynamicConfig
 
@@ -11,14 +12,17 @@ class Launcher:
         self.FASTAPI_HOST = self.config.get('launcher_fastapi_host')
         self.FASTAPI_LAUNCHER_PORT = self.config.get('launcher_fastapi_port')
         self.FASTAPI_COMMAND_DEV = ["fastapi", "dev", "modulingg/fastapi_core.py", "--port", str(self.FASTAPI_LAUNCHER_PORT), "--host", '0.0.0.0']
+        self.FASTAPI_COMMAND_PR = ["fastapi", "run", "modulingg/fastapi_core.py", "--port", str(self.FASTAPI_LAUNCHER_PORT), "--host", '0.0.0.0']
         self.FASTAPI_COMMAND_DEV_NOLOG = ["uvicorn", self.FASTAPI_MODULE_NAME, "--log-level", "critical","--port",str(self.FASTAPI_LAUNCHER_PORT)]
         pass
     
     def launchApp(self, mode="production"):
+
+        print('Api mode', os.getenv('API_MODE'))
         if mode == "development":
             subprocess.run(self.FASTAPI_COMMAND_DEV)
         elif mode == "production":
-            uvicorn.run(self.FASTAPI_MODULE_NAME, port=8000, host=self.FASTAPI_HOST)
+            subprocess.run(self.FASTAPI_COMMAND_PR)
         elif mode == "inspector":
             subprocess.run(self.FASTAPI_COMMAND_DEV_NOLOG)
     
@@ -29,7 +33,13 @@ class LauncherInterface:
         temp_launcher = Launcher()
         temp_launcher.launchApp('development')
 
+    
+    @staticmethod
+    def pr():
+        temp_launcher = Launcher()
+        temp_launcher.launchApp('development')
+
     @staticmethod
     def run():
         temp_launcher = Launcher()
-        temp_launcher.launchApp('production')    
+        temp_launcher.launchApp(os.getenv('API_MODE', 'production'))    

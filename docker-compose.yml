@@ -8,7 +8,10 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8100:9000"
+    environment:
+      - API_MODE=development
     volumes:
       - ./modulingg:/usr/src/app/modulingg
       - ./modules:/usr/src/app/modules
+
     command: python modulingg/main.py

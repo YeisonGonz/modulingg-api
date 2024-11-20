@@ -1,6 +1,7 @@
 import json
 import copy
 
+import os
 from typing import Optional
 from pydantic import BaseModel, Field
 
@@ -56,6 +57,9 @@ class DynamicConfig:
         if cls._instance is None:
             cls._instance = super(DynamicConfig, cls).__new__(cls)
             cls._instance.all_config = copy.copy(CONFIGURATION)
+            
+            cls._instance.all_config["launcher_fastapi_port"] = os.getenv('API_PORT', CONFIGURATION["launcher_fastapi_port"])
+            cls._instance.all_config["modulingg_prefix"] = os.getenv('API_PREFIX', CONFIGURATION["modulingg_prefix"])
         return cls._instance
 
     def get(self, key):

@@ -47,8 +47,34 @@ Y las siguientes ejecuciones solo llega con:
 docker compose up -d # -d : Omite la salida por consola
 ```
 
+### Environment con Docker
 
+Lista de todas las varibles de entorno que se pueden usar dentro de docker.
 
+```bash
+environment:
+  - API_MODE=development
+  - API_PORT=8000
+  - API_PREFIX=/mod
+
+```
+
+- **API_MODE**
+  - Permite cambiar el lanzamiento de la aplicacion entre _development_ y 
+  _production_.
+
+  - Valor por defecto: `production`
+
+- **API_PORT**
+  - Permite cambiar el puerto de FastAPI, en el entorno interno de **Docker**.
+
+  - Valor por defecto: 9000
+
+- **API_PREFIX**
+  - Permite cambiar el prefijo de los endpoints internos.
+
+  - Valor por defecto: /modulingg
+  
 ## Configuración ⚙️
 
 ### Modificar la configuración

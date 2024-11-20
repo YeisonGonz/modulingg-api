@@ -124,7 +124,7 @@ class MetricManager:
                 data = json.load(infile)
 
             if not isinstance(data, list):
-                raise ValueError("El archivo JSON no contiene un arreglo de objetos.")
+                raise ValueError("JSON File dont have any objects")
 
             # Escribir en formato JSONL
             with open(output_file, "w") as outfile:
@@ -134,7 +134,7 @@ class MetricManager:
 
         
         except Exception as e:
-            print(f"Error durante la conversión: {e}")
+            print(f"Failed to load files: {e}")
 
 
     
