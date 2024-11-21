@@ -3,6 +3,7 @@
     "enabled_modules_whitelist": [],
     "module_launcher_name": "main",
     "modules_folder_name": "modules",
+    "allow_metrics":true,
     "enable_internal_router": true,
     "modulingg_version": "2.0.0",
     "launcher_fastapi_host": "0.0.0.0",

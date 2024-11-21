@@ -61,6 +61,7 @@ class DynamicConfig:
             cls._instance.all_config["launcher_fastapi_port"] = os.getenv('API_PORT', CONFIGURATION["launcher_fastapi_port"])
             cls._instance.all_config["modulingg_prefix"] = os.getenv('API_PREFIX', CONFIGURATION["modulingg_prefix"])
             cls._instance.all_config["enable_internal_router"] = os.getenv('API_INTERNAL_ROUTER', CONFIGURATION["enable_internal_router"])
+            cls._instance.all_config["allow_metrics"] = os.getenv('METRICS', CONFIGURATION["allow_metrics"])
         return cls._instance
 
     def get(self, key):
