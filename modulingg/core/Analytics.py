@@ -1,5 +1,4 @@
 import io
-import json
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -58,8 +57,6 @@ class Analytics:
         df_grouped = df_analytics.groupby(['ip']).size().reset_index(name='count')
         
         return self._make_graph(df_grouped['ip'].values, df_grouped['count'].values)
-
-    
     
     def make_graph_analytics_by_lang(self, df_analytics):
         df_grouped = df_analytics.copy()

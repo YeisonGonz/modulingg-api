@@ -18,10 +18,10 @@ Reemplaza path/to/venv con la ruta donde quieres almacenar tu entorno virtual.
 
 ```bash
 # Crear el entrono virtual
-python -m venv path/to/venv
+python -m .venv path/to/.venv
 
 # Activar el entorno virtual de Python
-source path/to/venv/bin/activate
+source path/to/.venv/bin/activate
 
 # Instalar todas las dependencias
 pip install -r requirements.txt

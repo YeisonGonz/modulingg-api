@@ -3,7 +3,7 @@ import copy
 
 import os
 from typing import Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 # These are all default values, they can be permanently changed via the Config interface,
 # the safest way to modify the configuration is at run time, via the ConfigInterface interface and 
@@ -77,7 +77,7 @@ class CommandsDictionary:
         return data
     
 class CommandsDictionaryHelp:
-    def read_config():
+    def read_config(self):
         with open(COMMANDS_DIRECTORY_HELP_FILE, 'r') as file:
             data = json.load(file)
         return data    

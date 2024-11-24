@@ -20,7 +20,7 @@ class RequestInfoMiddleware(BaseHTTPMiddleware):
             "headers": dict(request.headers)
         }
         
-        if loads(config.get('allow_metrics').lower()): # Use JSON library because, json.loads transform 'false' into False
+        if loads(str(config.get('allow_metrics')).lower()): # Use JSON library because, json.loads transform 'false' into False
             metrics.append_metric_value(request_info)     
            
         response = await call_next(request)
